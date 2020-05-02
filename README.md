@@ -1,13 +1,14 @@
-Simple nhentai downloader from code
+# nh-get
+Simple [nhentai](https://nhentai.net) downloader from code.
 
-usage: nh-get.py [code...]
+## Requirements
+  * lxml
+  * aria2
+  * python3 (i'm using pypy3)
 
-Requirements
-    lxml
-    aria2
-    python3 (i'm using pypy3)
-    
-Credits
-    fixImgExt.sh
-    Ten Elite Brains
-    https://monishdesai.wordpress.com/2014/10/19/fiximgext/
+## Usage
+    $ nh-get.py [code...]
+
+## Credits
+[fixImgExt.sh](https://monishdesai.wordpress.com/2014/10/19/fiximgext/) Ten Elite Brains
+

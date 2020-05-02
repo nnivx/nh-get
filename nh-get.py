@@ -25,7 +25,7 @@ def get_image_url(img):
 
 Sauce = namedtuple('Sauce', 'title pages tags artists url image_urls')
 
-def get(code: int) -> Sauce:
+def get(code) -> Sauce:
     """Gets the sauce from nhentai codes.
     """
     url = 'https://nhentai.net/g/%s/' % code
@@ -88,7 +88,14 @@ if __name__ == '__main__':
 
                 # save zip
                 os.chdir(temp_dir)
-                zip_name = dest_dir.joinpath(sauce.title + '.cbz')
+
+                # FIX: replace slashes with DIVISION_SLASH
+                cleanpath = (sauce.title + '.cbz').replace('/', '\u2215')
+
+                zip_name = dest_dir.joinpath(cleanpath)
+                if not zip_name.parent.is_dir():
+                    raise IOError('Target "%s" does not exist' % zip_name.parent)
+
                 with ZipFile(zip_name, 'w', compression=ZIP_DEFLATED) as zf: 
                     for filename in files:
                         zf.write(filename)
@@ -96,3 +103,4 @@ if __name__ == '__main__':
         except requests.exceptions.RequestException:
             # TODO url hardcoded in different places
             print('Cannot get https://nhentai.net/g/%s/' % code, file=sys.stderr)
+        print()
